@@ -4,7 +4,7 @@ author: ""
 date: ""
 output: 
    xaringan::moon_reader:
-    css: "ds_slides.css"
+    css: "stat_slides.css"
     lib_dir: libs
     seal: false
     includes:
@@ -27,7 +27,7 @@ class: center, middle, inverse, title-slide
 
 <div class="title-logo"></div>
 
-# Análisis y Explotación de la Información
+# Estadística
 
 ## Tema 0 - Introducción
 
@@ -40,276 +40,45 @@ class: center, middle, inverse, title-slide
 ### Roi Naveiro
 ]
 
+---
 
+## Presentación
+
+* Estadística 1º MAT - 1º ECOMAT
+
+* Profesor: Roi Naveiro
+
+* Despacho: XX
+
+* Email: roi.naveiro@cunef.edu
+
+* Web: [roinaveiro.github.io/](roinaveiro.github.io/)
 
 ---
 
-## ¿Qué es la Ciencia de Datos?
+## Horario
 
-*"Data science is a concept to unify statistics, data analysis, machine learning and their related methods in order to **understand and analyze** actual phenomena with **data**. It employs techniques and theories drawn from many fields within the context of <font class="vocab">mathematics, statistics, information science, and computer science</font>."*
+* *Horario clases*
 
-.pull-right[
-[-Wikipedia](https://en.wikipedia.org/wiki/Data_science)
-]
+* *Asistencia:* Obligatoria, al menos 80%
 
 ---
+## Programa
 
-## ¿Qué es la Ciencia de Datos?
+* Tema 1: Estadística descriptiva
 
+* Tema 2: Probabilidad y variables aleatorias
 
-<img class=center src="img/DS_diag.png" height=400 />
+* Tema 3: Introducción a la inferencia
 
----
+* Tema 4: Contrastes de hipótesis y bondad de ajuste
 
-## ¿Qué son los Datos?
+* Tema 5: Introducción a la regresión simple y múltiple
 
-*"A collection of discrete units of information that in their most basic forms convey quantity, quality, fact, statistics, or other basic units of meaning."*
-
-.pull-right[
-[-Wikipedia](https://en.wikipedia.org/wiki/Data)
-]
-
---
-
-<br>
-<font class="vocab">¡Definición bastante vaga!</font>
+* Tema 6: Visualización de conjuntos de datos
 
 ---
-
-## Tipos de Datos
-
-* Cualquier unidad de información es un dato
-
-* Una distinción importante
-
-  * Datos estructurados
-  * Datos no estructurados
-  
----
-
-## Datos Estructurados
-
-Datos tabulares
-
-<img class=center src="img/excel.png" height=400 />
-
----
-
-## Datos No Estructurados
-
-Todo lo demás
-
-* Imágenes
-
-* Audio
-
-* Vídeo
-
-* Texto
-
----
-
-
-## Tipos de Análisis de Datos
-
-* Descriptivo
-
-* Exploratorio
-
-* Inferencial
-
-* Predictivo
-
-* Causal
-
----
-
-## Análisis Descriptivo
-
-**Objetivo**: resumir la información presente en un conjunto de datos
-
-  * Primer tipo de análisis de datos a realizar
-  * En general, las descripciones no se pueden generalizar sin la ayuda de modelos estadísticos
-  
----
-
-## Análisis Descriptivo
-
-La base de datos `mtcars` de R contiene información extraída de la *1974 Motor Trend US magazine* acerca de 10 aspectos de diseño de rendimiento de 32 vehículos. La variable `am` se refiere a la transmisión (0 = automática, 1 = manual)
-
-```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
-
-library(dplyr)
-library(explore)
-mtcars %>% explore(am)
-
-```
-
----
-
-## Análisis Exploratorio
-
-**Objetivo**: descubrir relaciones entre características de los datos 
-
-  * Motiva preguntas de investigación
-
----
-
-## Análisis Exploratorio
-
-La variable `wt` se refiere al peso del vehículo y `mpg` a las millas por galón
-
-```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
-
-library(dplyr)
-library(explore)
-mtcars %>% explore(wt, mpg)
-
-```
-
----
-
-## Análisis Inferencial
-
-**Objetivo**: usar una muestra pequeña de datos acerca de una población para extraer alguna información acerca de la misma.
-
-  * Aquí entra en juego la **estadística**
-  
----
-
-## Análisis Inferencial
-
-```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/pollution.png")
-```
-
-
----
-## Análisis Predictivo
-
-**Objetivo**: utilizar datos sobre un conjunto de objetos para predecir el valor de una variable en un objeto nunca antes visto
-
-  * X predice Y no implica que X sea causa de Y
-
----
-## Análisis Predictivo
-
-```{r pressure, echo=FALSE, out.width = '80%',  fig.align='center'}
-knitr::include_graphics("img/soy.svg")
-```
-
-[Fuente](https://www.r-bloggers.com/2020/11/time-series-demand-forecasting/)
-
----
-## Análisis Causal
-
-**Objetivo**: encontrar qué le sucede a una variable cuando se modifica el valor de otra
-
-  * Las relaciones causales usualmente identifican efectos medios, no efectos individuales
-
----
-## Análisis Causal
-
-
-$$\\[1in]$$
-
-```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/covid.png")
-```
-
-
----
-## Este curso
-
-Adentrarnos en la ciencia de datos a través de R
-
-* Datos Tabulares (observacions x variables)
-
-* Análisis Descriptivo, Exploratorio, Inferencial
-
-
-$$\\[0.3cm]$$
-
-```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/data-science-explore.png")
-```
-
-Aprenderemos las herramientas fundamentales de R para las distintas fases de este esquema.
----
-## Las fases de un proyecto de análisis de datos
-
-1. **Importación**: cargar datos en R procedentes de: base de datos, fichero, aplicación web (API), etc.
-
-2. **Organización**: almacenar datos de manera consistente con análisis.
-
-3. **Transformación**: filtrado, creación de variables derivadas, etc.
-
-4. **Visualización**:  generación de preguntas, descubrimiento de tendencias.
-
-5. **Análisis Exploratorio**: Visualización + tranformación aplicados de forma sistemática.
-
-6. **Modelización**: confirmar hipótesis, responder preguntas.
-
---
-
-Todo esto usando el **lenguaje de programación R**.
-
----
-
-## Tema 1 - Programación  en R
-
-- Introducción
-
-- Funciones
-
-- Paquetes y ayudas
-
-- Tipos de objetos de R
-
-- Selección y modificación de valores en objetos de R
-
-- Bucles y condicionales
-
-
----
-
-## Tema 2 - Análisis Exploratorio de los Datos
-
-- Visualización de datos
-
-- Transformación de datos
-
-- Análisis Exploratorio
-
-- Ética de datos
-
----
-
-## Tema 3 - Data Wrangling
-
-
-- Importación de datos
-
-- Organización de datos
-
-- Transformación de datos
-
----
-
-## Tema 4 - Comunicación de resultados y ética de los datos
-- TBD
-
----
-
-## Tema 5 - Modelización
-
-- TBD
-
-
----
-
 ## R y RStudio
-
 
 ### ¿Qué es R/RStudio?
 
@@ -324,18 +93,20 @@ knitr::include_graphics("img/r-rstudio.png")
 [Instalación de R y RStudio](https://rstudio-education.github.io/hopr/starting.html)
 
 ---
-
 ## Evaluación
 
-* 20%
+* **Convocatoria Ordinaria**
 
-* 20%
-
-* 60%
+  - Evaluación contínua: Examen escrito 1: 20%
+  - Evaluación contínua: Examen escrito 2: 20%
+  - Examen Ordinario Final: 60% (toda la materia)
+  
+* **Convocatoria Extraordinaria**: Examen Extraordinario Final (60%) + Evaluación contínua
 
 ---
-
 ## Recursos Interesantes
+
+* [Tutoriales R/RStudio](https://www.youtube.com/results?search_query=como+instalar+R+y+RStudio)
 
 * [Análisis de datos acerca de la evolución de las tendencias musicales](https://towardsdatascience.com/billboard-hot-100-analytics-using-data-to-understand-the-shift-in-popular-music-in-the-last-60-ac3919d39b49)
 
@@ -354,5 +125,7 @@ knitr::include_graphics("img/r-rstudio.png")
 
 * [Data Visualization, A practical introduction](https://socviz.co/), Healy (2018)
 
-* [Data Science Specialization](https://github.com/DataScienceSpecialization/courses), Johns Hopkins University, Coursera
+* Peña, D. (2008). Fundamentos de Estadística. Alianza Editorial, Madrid.
+
+
 
