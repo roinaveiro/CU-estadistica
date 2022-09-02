@@ -48,17 +48,19 @@ class: center, middle, inverse, title-slide
 
 * Profesor: Roi Naveiro
 
-* Despacho: XX
-
 * Email: roi.naveiro@cunef.edu
 
-* Web: [roinaveiro.github.io/](roinaveiro.github.io/)
+* Web del curso: [https://roinaveiro.github.io/CU-estadistica/](https://roinaveiro.github.io/CU-estadistica/)
 
 ---
 
 ## Horario
 
-* *Horario clases*
+* *Horario clases*: 
+
+  - Lunes 11.30 - 13.00
+  - Miércoles 11.30 - 13.00
+  - Jueves 12.30 - 13.30
 
 * *Asistencia:* Obligatoria, al menos 80%
 
@@ -77,6 +79,8 @@ class: center, middle, inverse, title-slide
 
 * Tema 6: Visualización de conjuntos de datos
 
+Asociados a algunos temas, tendremos **Laboratorios en R**
+
 ---
 ## R y RStudio
 
@@ -88,7 +92,6 @@ class: center, middle, inverse, title-slide
 ```{r, echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/r-rstudio.png")
 ```
-
 
 [Instalación de R y RStudio](https://rstudio-education.github.io/hopr/starting.html)
 
