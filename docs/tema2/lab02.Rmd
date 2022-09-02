@@ -1,0 +1,115 @@
+---
+title: "Lab 02 - Probabilidad y Variables Aleatorias"
+output:
+  html_document:
+    css: ./stat_labs.css
+    toc: yes
+    toc_float: yes
+    fig_caption: no
+    seal : False
+    includes:
+      after_body: insert-logo.html
+  pdf_document:
+    toc: yes
+---
+
+
+<div class="title-logo"></div>
+
+```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+knitr::opts_chunk$set(fig.width=8, fig.height=6) 
+```
+
+# Probabilidades en R
+
+# Ejercicios
+
+## Espacios muestrales y medidas de probabilidad
+
+- **Ej. 1**. ¿Cuáles son los espacios muestrales de los siguientes experimentos?
+
+  - Suma del resultado de tirar dos dados de seis caras
+  - Contar el número de clientes que llega a una estacion de servicio en un día
+  - Medir el tiempo que transcurre entre la caída de dos rayos consecutivos
+  
+- **Ej. 2**. Enumera dos sucesos compuestos de cada uno de los experimentos del ejercicio anterior.
+
+- **Ej. 3**. Sea $\Omega$ un espacio muestral y $\lbrace P_n: n = 1, \dots, K \rbrace$ una sucesión de **medidas de probabilidad** sobre este espacio. Definimos $P$ como una medida de probabilidad que a cualquier suces $A$ del espacio, le asgina probabilidad $\sum_{n=1}^K a_n P_n(A)$ donde $a_n \geq 0$ y $\sum_{n=1}^K a_n = 1$. Demostrar que $P$ es una medida de probabilidad sobre $\Omega$.
+
+- **Ej. 4**. Sea $\Omega = \lbrace 0,1,2, \dots \rbrace$. Demostrar que $P(A) = \sum_{x \in A}\frac{e^{-\lambda \lambda^x}}{x!}$ con $\lambda>0$ es una medida de probabilidad sobre $\Omega$. Calcula la probabilidad de los siguientes sucesos: $A = \lbrace 3<x<6 \rbrace$, $B = \lbrace x>2 \rbrace$ y $A \cap B^c$.
+
+## Regla de Laplace
+
+- **Ej. 1**. Se lanzan dos dados $n$ veces. ¿Cuál es la probabilidad de obtener al menos un seis doble?. Además de teóricamente, demuestra este resultado simulando en R.
+
+
+- **Ej. 2**. Se lanzan 100 monedas al aire. ¿Cuál es la probabilidad de obtener 36 caras?
+  
+## Probabilidad condicionada
+
+- **Ej. 1**. En el siguiente estudio original, se hizo un seguimiento de un cierto número de personas de diferentes países Europeos durante aproximadamente 16 años. De cada individuo, se midió su consumo de café (expresado como una variable categórica de tres niveles) y se registró si, durante el tiempo de seguimiento, el individuo falleció o no. Los resultados se recogen en la siguiente tabla.
+
+```{r gunter, echo=FALSE, out.width = 700, fig.align="center"}
+knitr::include_graphics("img/coffee.png")
+```
+
+
+```{r, echo = F}
+coffee <- c(rep("No toma café", 6477), rep("Toma café ocasionalmente", 34152), rep("Toma café de forma regular", 28535))
+died <- c(rep("Falleció", 1039), rep("No Falleció", 5438), 
+          rep("Falleció", 4440), rep("No Falleció", 29712),
+          rep("Falleció", 3601), rep("No Falleció", 24934))
+knitr::kable(table(coffee, died))
+```
+
+<br> 
+
+Fuente: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5788283/
+
+<br>
+
+Define los eventos $A=\textit{Fallecer}$  y $B=\textit{No beber café}$. Para una persona seleccionada al azar de la población del estudio, calcula:
+
+  - Las **probabilidades marginales**: $P(A)$ y $P(B)$.
+  - La **probabilidad conjunta**: $P(A, B) = P(A \cap B)$.
+  - Las **probabilidades condicionales**: $P(A|B)$ y $P(B|A)$.
+
+¿Son $A$ y $B$ eventos independientes?
+
+- **Ej 2.**. Se sabe que al lanzar cinco monedas equilibradas aparecieron al menos 2 caras. ¿Cuál es la probabilidad de caras exacto fuera 3?
+
+- **Ej 3.**. Una central nuclear tiene cuatro planes de contingencia en caso de fuga en el reactor.
+El plan 1 tiene probabilidad de fracaso  de $1/10$, el dos de $2/10$, el tres de $3/10$ y el cuatro de
+$4/10$. Se ha observado que dos planes han fallada. Calcula la probabilidad de que los que han fallado hayan sido el 1 y el 2. 
+
+
+
+## Teorema de probabilidad total y Regla de Bayes
+
+- **Ej 1.**. En el curso de Estadística de CUNEF el 50% de los estudiantes son de Madrid, el 30% de León y el 20% de Galicia.
+80% de los madrileños viste pantalones beige, mientras que, entre leoneses y gallegos solo el 40%  y el 10% viste pantalones beige.
+
+  * ¿Cuál es la probabilidad de que un alumno del curso seleccionado al azar lleva pantalón beige?
+  * ¿Cuál es la probabilidad de que un alumno seleccionado al azar sea Madrileño si vemos que no viste pantalones beige?
+
+
+- **Ej 2.**. En la carretera entre León y Riaño, 1 de cada 1000 conduce bajo los efectos del alcohol. 
+Para disminuír la tasa de accidentes, se coloca un control de alcoholemia en este tramo, con las siguientes características. El alcoholímetro siempre da resultado positivo cuando quien sopla está borracho. No obstante, se quivoca el 3% de las veces cuando quien sopla está sobrio. 
+
+  * ¿Cuál es la probabilidad de que alguien seleccionado al azar en ese tramo de positivo en el control?
+  * Si al hacer un control a alguien seleccionado al azar en ese tramo el aparato da positivo, ¿cuál es la probabilidad de que la persona esté realmente bebida?
+  
+- **Ej 3.**. El porcentaje de trajes defectuosos elaborados por las fábricas 1, 2 y 3 es de, respectivamente, 1%, 0,8% y 2%. Si sabemos que la fábrica 1 produce 500 trajes diarios, la dos 1000 y la tres 2000, calcula:
+  * La probabilidad de que un traje escogido al azar sea defectuoso.
+  * La probabilidad de que un traje defectuoso escogido al azar haya sido producido en la fábrica 1.
+
+## Variables aleatorias, 
+
+**Ej. 1**. Representar la función de distribución para la variable aleatoria suma de las caras al tirar un dado dos veces.
+
+**Ej 2.**.  La duración de las reunioned de Zoom del equipo de gobierno de un cierto país es una variable aleatoria con distribución
+
+$$
+f(t) = \left \lbrace
+$$

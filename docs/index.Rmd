@@ -1,0 +1,42 @@
+---
+title: "**Estadística**"
+subtitle: "CUNEF Universidad"
+date: "Página actualizada: `r format.Date(file.mtime('index.Rmd'),'%Y-%m-%d')`"
+output:
+  html_document:
+    css: ./index.css
+    toc: yes
+    toc_float: yes
+    fig_caption: no
+    seal : False
+    includes:
+      after_body: insert-logo.html
+  pdf_document:
+    toc: yes
+---
+
+
+<div class="title-logo"></div>
+
+```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+knitr::opts_chunk$set(fig.width=8, fig.height=6) 
+```
+
+
+Esta es la página del curso de Estadística creada por
+[Roi Naveiro](http://roinaveiro.github.io)
+
+## **Recursos**
+
+### Tema 0 : Introducción
+  - [Diapositivas](./tema0/tema0.html)
+  
+### Programación en R
+  - [Diapositivas](./introR/introR.html)
+  
+## **Laboratorios**
+
+  - [Lab 01 - Estadística Descriptiva](./tema1/lab01.html)
+  
+  - [Lab 02 - Probabilidad y Variables Aleatorias](./tema2/lab02.html)
