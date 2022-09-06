@@ -41,4 +41,5 @@ vignettes/*.pdf
 # To do list
 
 TODO.txt
-tema1/
+docs/tema1/*
+docs/tema2/*
