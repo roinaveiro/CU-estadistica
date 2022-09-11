@@ -21,8 +21,244 @@ knitr::opts_chunk$set(echo = T, warning = F, message = F)
 knitr::opts_chunk$set(fig.width=8, fig.height=6) 
 ```
 
+# El lenguaje de programación R
 
-# Introducción
+R es un **software libre** de programación especializacido en estadística. RStudio es una interfaz que facilita la programación en R.
+
+- R: lenguaje de comunicación
+- RStudio: forma de comunicarse con máquina
+
+```{r, echo=FALSE, out.width = '80%',  fig.align='center'}
+knitr::include_graphics("img/r-rstudio.png")
+```
+
+```{r, echo=FALSE, out.width = '70%',  fig.align='center'}
+knitr::include_graphics("img/RGUI.png")
+```
+
+
+En el siguiente enlace puede encontrarse información acerca de la instalación de R y RStudio en diferentes sistemas operativos.
+[https://rstudio-education.github.io/hopr/starting.html](https://rstudio-education.github.io/hopr/starting.html).
+
+
+## Ejecutar comandos en R
+
+Nos comunicamos con R a través de la consola de comandos. Por ejemplo,
+con el siguiente código damos a R la orden de multiplicar 123 por 65.
+```{r, echo=TRUE}
+123 * 65
+```
+
+La respuesta en consola aparece como
+
+```{r, echo=FALSE, out.width = '20%',  fig.align='center'}
+knitr::include_graphics("img/console.png")
+```
+
+Suele ser buena práctica explicar el código que se crea. Esto se hace a través de comentarios. Los comentarios se inician con el caracter #. De esta manera, R reconoce que lo que sucede a este caracter es un comentario y no lo ejecuta. Por ejemplo:
+
+```{r, echo=TRUE}
+# Esto es un comentario
+# Este código ultiplica 100*12
+100*12
+```
+
+## R como calculadora
+
+Podemos usar R como calculadora. Algunas operaciones básicas son:
+
+
+```{r, echo=TRUE}
+# Suma
+2+2
+# Resta
+2-2
+# Multiplicación
+2*3
+# Divisón
+2/3
+# Potencias
+2^3
+# Raíz cuadrada
+sqrt(9)
+# Logaritmo Natural
+log(100)
+# Logaritmo en base 10
+log(100,10)
+# Exponencial
+exp(1)
+# Valor Absoluto
+abs(-4)
+# Factorial
+factorial(3)
+# Combinaciones de 4 en 2
+choose(4,2)
+```
+
+Ante operaciones de resultado indeterminado, R devuelve un NaN (not a number).
+
+
+```{r, echo=TRUE}
+0/0
+```
+
+## Objetos de R
+
+Si queremos un valor (o conjunto de valores) de forma recurrente hay que **guardarlos en memoria**, dándole un nombre.
+
+```{r, echo=TRUE}
+# Esto crea un objeto de R con valor pi
+a <- pi
+
+# Sumo 3 al valor guardado
+a + 3
+```
+
+Podemos guardar múltiples valores
+
+```{r, echo=TRUE}
+# Esto guarda los números del 1 al 10
+b <-1:10
+b
+```
+
+
+Los objetos guardados aparecen en la ventana de *Environment* de RStudio
+
+```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/env.png")
+```
+
+El nombre de un ojeto no puede empezar con un número, ni tampoco incluír ciertos caracteres especiales como `^`, `$`, `@`, etc.
+
+**Importante**: R sobre-escribe. Observa lo que sucede en este código.
+
+```{r, echo=TRUE}
+c <- 5
+c
+
+c <- 20
+c
+```
+
+Se pueden realizar operaciones sobre objetos. R realiza operaciones *element-wise* (elemento a elemento)
+
+* Vector - Número
+```{r, echo=TRUE}
+b <- 1:10
+b + 7
+```
+
+* Vector - Vector (misma longitud): R repite el vector corto hasta alcanzar la longitud del largo.
+```{r, echo=TRUE}
+b * b
+```
+
+* Vector - Vector (diferente longitud): R repite el vector corto hasta alcanzar la longitud del largo. Si la longitud del corto no es múltiplo de la del largo lanza un warning
+
+```{r, echo=TRUE}
+d <- 1:2
+e <- 1:4
+
+d * e
+```
+
+
+R permite combinar objetos con la función `c()`.
+Por ejemplo, podemos crear un vector de enteros de la siguiente forma
+
+```{r, echo=TRUE}
+a <- c(1,2,3)
+a
+```
+
+También podemos añadir elementos a un vector existente
+
+```{r, echo=TRUE}
+a <- c(a, 4,5)
+a
+```
+
+No solo podemos crear vectores de números!
+
+```{r, echo=TRUE}
+a <- c('adiós', 'hola')
+a
+```
+
+A continuación, mostramos algunas de las operaciones que podemos realizar sobre vectores
+
+```{r, echo=TRUE}
+# Definimos dos vectores a y b
+a<-c(1,3,5)
+b<-c(2,4,7)
+# Multiplicación por escalar
+3*a
+# Suma
+a+b
+# Resta
+a-b
+# Producto (elemento a elemento)
+a*b
+# División (elemento a elemento)
+a/b
+# Producto escalar
+a %*% b
+# Borrar a y b
+rm(a,b)
+```
+
+Suele ser útil definir secuencias de números consecutivos. Esto en R es muy sencillo
+
+```{r, echo=TRUE}
+# Definimos el vector (10,11,...,80)
+a<-10:80
+a
+# Secuencia de 1 a 10 con saltos de 1 (igual que 1:10)
+seq(1,10,1)
+# Secuencia de 1 a 10 con saltos de 0.1
+seq(1,10,0.1)
+# Secuencia de 2 a 20 con saltos de 2
+seq(2,20,2)
+```
+
+Podemos determinar la longitud de un vector usando `length(x)`
+```{r, echo=TRUE}
+length(a)
+```
+
+Y sumar sus elementos usando `sum(x)`
+```{r, echo=TRUE}
+sum(a)
+```
+
+En R, es muy sencillo extraer elementos específicos de un vector.
+```{r, echo=TRUE}
+# Extraemos el elemento 15
+a[15]
+# Extraemos los elementos del 18 al 24
+a[18:24]
+# Extraemos los elementos del 17 al 23 y del 28 al 30
+c(a[17:23],a[28:30])
+# Extraemos los elementos con valor mayor o igual a 70
+a[a>=70]
+# Extraemos los elementos con valor mayor o igual a 70 y valor menor a 75
+vres<-a[(a>=70)&(a<75)]
+vres
+```
+
+Prueba lo siguiente:
+
+- Define una secuencia de números del 1 al 100 y súmalos.
+
+- Comprueba que el resultado es idéntico utilzando la expresión demostrada en clase
+
+
+  $$
+  \sum_{i=1}^{K} i = \frac{K \cdot (K + 1)}{2}
+  $$
+
+# Estadística Descriptiva en R
 
 La estadística descriptiva es un conjunto de técnicas numéricas y gráficas con las que se intenta descubrir la estructura interna de un conjunto de datos. La estadística descriptiva es una parte fundamental del análisis exploratorio de los datos, que podríamos definir como *el arte de observar los datos, generar hipótesis y testearlas*.
 
@@ -36,36 +272,35 @@ knitr::include_graphics("img/data-science-explore.png")
 Es fundamental que la estadística descriptiva se realice de manera  **reproducible**. De esta manera, cualquier persona puede replicar el análisis con el fin de cuestionarlo, criticarlo o reafirmarlo. Actualmente existen múltiples herramientas que garantizan la reproducibilidad del análisis de datos.
 Una herramienta fundamental es **R (y su interfaz RStudio)**.
 
-En este laboratorio vamos a estudiar las técnicas fundamentales de estadística descriptiva haciendo uso del software R. Primero de todo, debéis instalar los paquetes que utilizaremos en esta sesión, usando:
+En este laboratorio vamos a estudiar las técnicas fundamentales de estadística descriptiva haciendo uso del software R. 
 
-```{r, eval=F}
-install.packages("ggplot2")
-```
-
-Utilizaremos como referencia el dataset `mtcars`. Puedes ver las primeras lineas usando
+Utilizaremos como referencia el dataset `mtcars`. La base de datos `mtcars` de R contiene información extraída de la *1974 Motor Trend US magazine* acerca de 10 aspectos de diseño de rendimiento de 32 vehículos. Puedes ver las primeras lineas usando
 
 ```{r}
 head(mtcars)
 ```
 
 Puedes acceder a más información escribiendo en la consola `?mtcars`.
+Para acceder a los valores de cada variable para los 32 vehículos, se utiliza lo siguiente.
+```{r}
+# Valores de tipo de transmisión
+mtcars$am
+# Valores de peso de vehículo
+mtcars$wt
+# Valores de millas por galón
+mtcars$mpg
+```
 
+## Distribuciones de Frecuencias
 
-# Distribuciones de Frecuencias
-
-Crear una table de frecuencias en R requiere utilizar el comando `table()`. Por ejemplo
+Crear una tabla de frecuencias en R requiere utilizar el comando `table()`. Por ejemplo
 
 ```{r}
 table(mtcars$am)
 ```
 
-muestra el número de coches (frecuencia simple) con transmisión automática (`am = 0`) y el númer de coches con transmisión manual (`am = 1`). 
+muestra el número de coches (frecuencia simple) con transmisión automática (`am = 0`) y el número de coches con transmisión manual (`am = 1`). 
 
-Obsérves que `am` se trata de una variable cualitativa. Conviene convertirla a una variable de tipo factor.
-
-```{r}
-mtcars$am <- as.factor(mtcars$am)
-```
 
 Para mostrar frecuencias relativas:
 
@@ -106,307 +341,13 @@ breaks = seq(10, 34, by=4)
 table( cut(mtcars$mpg, breaks, right = F)  )
 ```
 
-# Visualización
+## Medidas de tendencia central 
 
-En esta parte del laboratorio nos centraremos en reproducir en R alguno de los gráficos vistos en la teoría. Para ello, utilizaremos `ggplot2` un paquete realmente útil para la visualización.
-`gg` significa Grammar of Graphics y está inspirado en el libreo **Grammar of Graphics** de Leland Wilkinson
-
-```{r, echo=FALSE, out.width = '60%',  fig.align='center'}
-knitr::include_graphics("img/grammar-of-graphics.png")
-```
-
-GG: herramienta que permite describir de forma secuencial los componentes de un gráfico.
-
-Primero de todo, cargamos la librería `ggplot2`:
-```{r}
-library(ggplot2)
-```
-
-Para ganar intuición acerca del funcionamiento de `ggplot2` vamos a presentar una visualización completa y explicar paso a paso cómo se realiza.
-
-## Primera visualización
-
-Para esta visualización, utilizamos datos sobre PIB per cápita y esperanza de vida en el año 2007 de `gapminder`. Para acceder a estos datos, es necesario instalar el paquete `gapminder`.
-
-```{r, eval=F}
-install.packages("gapminder")
-```
-
-Una vez instalada la librería la cargamos
-```{r}
-library(gapminder)
-```
-
-Puedes obtener más información sobre estos datos utilizando `?gapminder`.
-
-Estamos listos para realizar la visualización completa usando
-
-```{r, fig.align='center',out.extra='angle=90'}
-# Primero seleccionamos los datos de 2007
-gapminder07 <- gapminder[gapminder$year == 2007,]
-
-# Realizamos la visualización
-ggplot(gapminder07, 
-     aes(gdpPercap, lifeExp, size = pop, color = continent)) + 
-     geom_point() +
-     labs(title = "Mi primer gráfico en ggplot!",
-     subtitle = "Mi primer gráfico en ggplot!",
-     x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-     scale_x_log10()  # convert to log scale
-
-```
-
-
-¿Sabrías intuír qué hace cada línea?
-
-La estructura del código de `ggplot2` es la siguiente
-
-```{r eval = FALSE}
-ggplot(data = [dataset], 
-       mapping = aes(x = [x-variable], y = [y-variable])) +
-   geom_xxx() +
-   otras opciones
-```
-
-El `mapping`  define como las variables son mapeadas a propiedades visuales del gráfico.
-Las opciones `geom_xxx()` definen la forma del gráfico. Puedes encontrar un documentación completa en [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/).
-
-
-Vamos a reproducir el gráfico paso a paso.
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, aes(x = gdpPercap, y = lifeExp) ) +  
-     geom_point() 
-```
-
-Vemos que `geom_point()` crea un gráfico tipo *scatter plot*.
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, aes(x = gdpPercap, y = lifeExp) ) +  
-     geom_point() +
-     scale_x_log10() 
-```
-
-`scale_x_log10() ` representa el eje x en escala logarítmica.
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, 
-     aes(gdpPercap, lifeExp)) + 
-     geom_point() +
-     labs(title = "PIB per Cápita vs Esperanza de Vida",
-     subtitle = "Mi primer gráfico en ggplot!",
-     x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-     scale_x_log10()  # convert to log scale
-```
-
-`labs()` sirve para añadir título, subtítuo y etiquetas a los ejes.
-
-Fijémonos que faltan aun un par de detalles que representan información sobre el continente y la población de los distintos países mostrados. A continuación explicamos cómo representar esta información.
-
-## Representando Variables adicionales
-
-Como hemos visto, es posible que queramos representar más de dos variables utilizando un gráfico bidimensional. Podemos hacerlo a través de otros elementos del gráfico. En particular, existen dos formas de hacerlo:
-
-* A través de los **aesthetics**. Son elementos estéticos del gráfico. En particular:
-
-  * shape : forma de los puntos.
-  * color : color de los puntos.
-  * size  : tamaño de los puntos.
-  * alpha : transparencia.
-
-* Utilizando **faceting**: permite partir un gráfico en varios según los valores de una o más variables cualitativas.
-
-
-
-### Aesthetics
-
-Representamos el continente en el gráfico anterior
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, 
-     aes(gdpPercap, lifeExp, color = continent)) + 
-     geom_point() +
-     labs(title = "Mi primer gráfico en ggplot!",
-     subtitle = "Mi primer gráfico en ggplot!",
-     x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-     scale_x_log10()  # convert to log scale
-
-```
-
-
-Representamos el continente y la población en el gráfico anterior
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, 
-     aes(gdpPercap, lifeExp, color = continent, size = pop)) + 
-     geom_point() +
-     labs(title = "Mi primer gráfico en ggplot!",
-     subtitle = "Mi primer gráfico en ggplot!",
-     x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-     scale_x_log10()  # convert to log scale
-
-```
-
-Podemos utilizar `shape` junto con `color` para representar el continente
-
-```{r, fig.align='center',out.extra='angle=90'}
-ggplot(gapminder07, 
-     aes(gdpPercap, lifeExp, color = continent, shaep = continent, size = pop)) + 
-     geom_point() +
-     labs(title = "Mi primer gráfico en ggplot!",
-     subtitle = "Mi primer gráfico en ggplot!",
-     x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-     scale_x_log10()  # convert to log scale
-
-```
-
-
-
-La siguiente tabla recoge información acerca de cómo usar los aesthetics para
-representar variables
-contínuas y discretras
-
-aesthetics    | discreta                 | contínua
-------------- | ------------------------ | ------------
-color         | diferentes colores       | gradiente
-size          | pasos discretros         | mapeo linear entre variable y radio
-shape         | diferentes formas        | no funciona
-
-
-
-### Faceting
-
-Esto permite crear múltiples gráficas en función de variable. Por ejemplo, representamos cada continente en una gráfica
-
-```{r, fig.width=6.5, fig.height=4.5}
-ggplot(data = gapminder07, aes(x = gdpPercap, y = lifeExp)) + 
-  geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-  facet_grid(. ~ continent)  
-```
-
-También se puede hacer por filas
-
-```{r, fig.width=6.5, fig.height=4.5}
-ggplot(data = gapminder07, aes(x = gdpPercap, y = lifeExp)) + 
-  geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-  facet_grid(continent ~ .)  
-```
-
-
-La función `facet_grid` permitiría escoger dos variables diferentes para realizar tantos gráficos como valores conjuntos de estas dos variables.
-
-La función `facet_wrap` trabaja con una sola variable.
-
-```{r, fig.width=6.5, fig.height=4.5}
-ggplot(data = gapminder07, aes(x = gdpPercap, y = lifeExp)) + 
-  geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-  facet_wrap(continent ~ .)  
-```
-
-El argumento `scales = "free_x"` permite que no todas las gráficas compartan la escala del eje x.
-
-```{r, fig.width=6.5, fig.height=4.5}
-ggplot(data = gapminder07, aes(x = gdpPercap, y = lifeExp)) + 
-  geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
-  facet_wrap(continent ~ ., scales = "free_x")  
-```
-
-En resumen
-
-- `facet_grid()`: 
-    - Red 2d. Permite representar mútiples gráficas en función de los valores que toman
-    dos variables culitativas.
-    - `filas ~ columnas`
-    - `.` para evitar una de ellas
-
---
-
-- `facet_wrap()`: Red 1d.  
-    - Es posbile fijar escalas con `scales = ` ("free_x", "free_y", "free")
-
-
-## Visualización de datos cualitativos
-
-Como hemos visto, una de las técnicas de visualización de datos cualitativos más importantes es el 
-**gráfico de barras**. Podemos representar un gráfico de barras en `ggplot2` simplemente usando `geom_bar()`:
-
-```{r}
-ggplot(mtcars, mapping = aes(x = am)) + 
-  geom_bar()+
-  labs(x = 'Tipo de transmisión', y = 'Frecuencia') +
-  scale_x_discrete(labels=c("Automatica", "Manual") )
-```
-
-También es sencillo representar proporciones
-
-```{r}
-ggplot(mtcars, mapping = aes(x = am)) + 
-  geom_bar(aes(y = (..count..)/sum(..count..))) + 
-  labs(x = 'Tipo de transmisión', y = 'Proporción') +
-  scale_x_discrete(labels=c("Automatica", "Manual") )
-```
-
-Fijáos cómo hemos conseguido modificar los nombres de los diferentes tipos de transmisión en el eje x.
-
-
-## Visualización de datos cuantitativos
-
-Para visualizar datos cuantitativos discretos, podemos usar el diagrama de barras de la misma forma que con datos cualitativos. Para datos cuantitativos contínuos, usamos el histograma o la función de densidad.
-Podemos representar un histograma utilizando `geom_histogram()`
-
-```{r}
-ggplot(mtcars, mapping = aes(x = mpg)) + 
-     geom_histogram(binwidth = 2) + 
-     labs(x = "Millas por galón")
-```
-Aquí hemos seleccionado la anchura de las barras. También podemos seleccionar el número de ellas.
-
-```{r}
-ggplot(mtcars, mapping = aes(x = mpg)) + 
-     geom_histogram(bins = 20) + 
-     labs(x = "Millas por galón")
-```
-
-Por último, es muy sencillo realizar un gráfico de densidad
-
-```{r}
-ggplot(mtcars, mapping = aes(x = mpg)) + 
-     geom_density() +
-     labs(x = "Millas por galón")
-```
-
-Por último, hemos visto que el boxplot puede ser una representación de interés para una variable contínua
-
-
-```{r}
-ggplot(mtcars, mapping = aes(x =mpg)) + 
-  geom_boxplot() + 
-  labs(x = "Millas por galón")
-```
-
-# Medidas de tendencia central
-
-R cuenta con muchas funciones que permiten calcular directamente las medidas más características que se utilizan en estadística descriptiva. Repasamos algunas de las más importantes utilizadas sobre la variable 
- `mpg` (millas por galon de diferentes vehículos) 
+R cuenta con muchas funciones que permiten calcular directamente las medidas más características que se utilizan en estadística descriptiva. Repasamos algunas de las más importantes utilizadas sobre la variable `mpg` (millas por galon de diferentes vehículos) 
 
 ```{r}
 # Media
 mean(mtcars$mpg)
-
-# Media ponderada
-weighted.mean(mtcars$mpg, w=rep(1, nrow(mtcars)))
 
 # Mediana
 median(mtcars$mpg)
@@ -420,23 +361,12 @@ quantile(mtcars$mpg, 0.99)
 # Unos cuantos percentiles
 quantile(mtcars$mpg)
 
+# Un resumen de la distribución de la variable
+summary(mtcars$mpg)
+
 ```
 
-Para otros estadísticos que no se incluyan entre las funciones de R, podemos crear funciones propias.
-Por ejemplo, para la moda de datos cualitativos
-
-```{r}
-my_mode <- function(x) {                  
-  unique_x <- unique(x)
-  tabulate_x <- tabulate(match(x, unique_x))
-  unique_x[tabulate_x == max(tabulate_x)]
-}
-
-my_mode(mtcars$am)
-```
-
-
-# Medidas de dispersión
+## Medidas de Dispersión
 
 A continuación, mostramos cómo calcular algunas de las medidas de dispersión más importantes
 
@@ -455,9 +385,18 @@ var(mtcars$mpg)
 
 # Raíz de cuasivarianza
 sd(mtcars$mpg)
+
+# varianza
+var(mtcars$mpg) * (length(mtcars$mpg)-1)/length(mtcars$mpg)
+
+# Obtencion de la varianza
+mean((mtcars$mpg-mean(mtcars$mpg))^2)
+# otro metodo
+sum((mtcars$mpg-mean(mtcars$mpg))^2)/length(mtcars$mpg)
+
 ```
 
-# Medidas de forma
+## Medidas de forma
 
 Algunas de las medidas de asimetría y curtosis pueden calcularse utilizando el paquete `moments`.
 
@@ -469,29 +408,81 @@ skewness( rnorm(1000) )
 
 # Coeficiente de curtosis (+3)
 kurtosis( rnorm(1000) )
+
 ```
 
-# Ejercicios
 
-- **Ej. 1**. Escribe una funciones en R que calculen:
+## Visualización
 
-  * El coeficiente de apertura.
-  * El recorrido relativo.
-  * El recorrido semi-intercuartílico.
-  * El índice de dispersión respecto de la mediana.
+En esta parte del laboratorio nos centraremos en reproducir en R alguno de los gráficos vistos en la teoría. 
 
-- **Ej. 2**. Escribe una función de R con un argumento llamado `k` que devuelva el momento de orden `k` respecto de la media de un conjunto de datos contínuos.
 
-- **Ej. 3**. Calcula el PIB per cápita medio y mediano de los países recogidos en el dataset `gapminder` en el año 1967. ¿Cuál es mayor? ¿Esto qué significa?
+### Visualización de datos cualitativos
 
-- **Ej. 4**. Repite el cálculo excluyendo los datos de Kuwait. ¿Qué conclusión extraes?
+Como hemos visto, una de las técnicas de visualización de datos cualitativos más importantes es el  **gráfico de barras**. Podemos representar un gráfico de barras en usando `barplot`:
 
-- **Ej. 5**. Calcula el percentil 90 del PIB per cápita de los países recogidos en el dataset `gapminder` en el año 1967. ¿Cómo se interpreta?
+```{r}
+n_vehiculos = table(mtcars$am)
+barplot(n_vehiculos, names.arg=c("Automático", "Manual"), 
+        xlab="Tipo de Transmisión", ylab="Numero de vehículos", 
+        col="gray",
+        main = "Numero de vehículos según tipo de transmisión",
+        horiz = TRUE)
+```
 
-- **Ej. 6**. ¿Es la distribución de este PIB per cápita simétrica? ¿Positiva o negativa? Confírmalo con algún estadístico.
+También podemos representar gráficos de escalera
+```{r}
+nfamilias<-c(5,10,12,6,4,3)
 
-- **Ej. 7**. Representa este PIB per cápita en usando un histograma y un boxplot.
+# Dividir la pantalla
+par(mfrow=c(1,2)) 
 
-- **Ej. 8**. Demuestra que la media aritmética de la variable *z = x + y* es la suma de las medias de *x* e *y*.
+plot(0:5,nfamilias, type="s", col="black",
+     xlab="Numero de hijos",
+     ylab="Numero de familias")
+plot(0:5,cumsum(nfamilias), type="s",col="black",
+     xlab="Numero de hijos",
+     ylab="Numero de familias")
+```
 
-- **Ej. 9**. Utilizando R, muestra la distribución cumulativa de frecuencias relativas de la variable `mpg` del dataset `mtcars`.
+Así pintamos un diagrama de sectores
+
+```{r}
+pie(nfamilias, col=rainbow(24), labels=c(0:5), main="Numero de hijos por familia")
+
+pie(nfamilias, col=rainbow(24), labels = nfamilias, edges = 9, 
+    main="Numero de hijos por familia")
+
+pie(nfamilias, col=rainbow(24), labels = paste0(nfamilias, "%"), 
+    main="Numero de hijos por familia")
+
+# EXTRA: Incluir label y porcentaje
+pct <- round(nfamilias/sum(nfamilias)*100)
+lab=c(0:5)
+lab <- paste(lab, pct) # add % a labels 
+lab <- paste(lab, "%", sep="") # ad % to labels
+pie(nfamilias, col=rainbow(24), labels = lab, 
+    main="Numero de hijos por familia")
+```
+
+
+### Visualización de datos cuantitativos
+
+Para visualizar datos cuantitativos discretos, podemos usar el diagrama de barras de la misma forma que con datos cualitativos. Para datos cuantitativos contínuos, usamos el histograma, la función de densidad y el boxplot.
+Podemos representar un histograma utilizando `hist()`. Es sencillo superponer el gráfico de densidad al histograma.
+
+```{r}
+hist(mtcars$mpg, col="gray",
+     breaks = 15,
+     xlab="Millas por galón", 
+     prob=TRUE,
+     main="Histograma de la variable mpg")
+lines(density(mtcars$mpg))
+```
+
+Por último, hemos visto que el boxplot puede ser una representación de interés para una variable contínua
+
+```{r}
+boxplot(mtcars$mpg, col="gray", main="Diagrama de caja de la variable MPG")
+
+```
