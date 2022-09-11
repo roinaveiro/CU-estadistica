@@ -24,7 +24,7 @@ knitr::opts_chunk$set(fig.width=8, fig.height=6)
 ```
 
 
-Esta es la página del curso de Estadística creada por
+Esta es la página del curso de Estadística creada por José María Sarabia y
 [Roi Naveiro](http://roinaveiro.github.io)
 
 ## **Recursos**
