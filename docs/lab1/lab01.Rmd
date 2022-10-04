@@ -448,13 +448,13 @@ plot(0:5,cumsum(nfamilias), type="s",col="black",
 Así pintamos un diagrama de sectores
 
 ```{r}
-pie(nfamilias, col=rainbow(24), labels=c(0:5), main="Numero de hijos por familia")
+# Incluyendo label
+pie(nfamilias, col=rainbow(24), labels= c(0:5), main="Numero de hijos por familia")
 
+# Incluyendo número
 pie(nfamilias, col=rainbow(24), labels = nfamilias, edges = 9, 
     main="Numero de hijos por familia")
 
-pie(nfamilias, col=rainbow(24), labels = paste0(nfamilias, "%"), 
-    main="Numero de hijos por familia")
 
 # EXTRA: Incluir label y porcentaje
 pct <- round(nfamilias/sum(nfamilias)*100)
