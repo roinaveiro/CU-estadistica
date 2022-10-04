@@ -1964,8 +1964,10 @@ mtcars$mpg</code></pre>
 automática (<code>am = 0</code>) y el número de coches con transmisión
 manual (<code>am = 1</code>).</p>
 <p>Para mostrar frecuencias relativas:</p>
-<pre class="r"><code>table(mtcars$am) / nrow(mtcars$am)</code></pre>
-<pre><code>## numeric(0)</code></pre>
+<pre class="r"><code>table(mtcars$am) / length(mtcars$am)</code></pre>
+<pre><code>## 
+##       0       1 
+## 0.59375 0.40625</code></pre>
 <p>También es sencillo elegir nombres más representativos para las
 columnas</p>
 <pre class="r"><code>tabla_frecuencias &lt;- table(mtcars$am)
@@ -2066,10 +2068,10 @@ utilizando el paquete <code>moments</code>.</p>
 
 # Coeficiente de asimetría
 skewness( rnorm(1000) )</code></pre>
-<pre><code>## [1] 0.1628116</code></pre>
+<pre><code>## [1] 0.1316773</code></pre>
 <pre class="r"><code># Coeficiente de curtosis (+3)
 kurtosis( rnorm(1000) )</code></pre>
-<pre><code>## [1] 2.99265</code></pre>
+<pre><code>## [1] 2.982052</code></pre>
 </div>
 <div id="visualización" class="section level2">
 <h2>Visualización</h2>

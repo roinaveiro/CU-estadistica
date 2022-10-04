@@ -305,7 +305,7 @@ muestra el número de coches (frecuencia simple) con transmisión automática (`
 Para mostrar frecuencias relativas:
 
 ```{r}
-table(mtcars$am) / nrow(mtcars$am)
+table(mtcars$am) / length(mtcars$am)
 ```
 
 También es sencillo elegir nombres más representativos para las columnas
